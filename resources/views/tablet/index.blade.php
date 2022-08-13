@@ -9,7 +9,7 @@
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
                     <li class="breadcrumb-item active">Tablet Mode</li>
                 </ol>
             </div>
@@ -191,14 +191,33 @@
                     </button>
                 </div>
                 <div class="modal-body bg-secondary">
-                    <p>Date</p>
-                    <p>Description</p>
-                    <p>Amount</p>
+                {!! Form::open(['action' => 'App\Http\Controllers\ClientsController@store', 'method' => 'POST',]) !!}
+                    <div class="row">
+                        {{Form::label('name', 'Name:', ['class' => 'form-control bg-secondary col-sm-2'])}}
+                        {{Form::text('name', '', ['class' => 'form-control col-sm-10'])}}
+                    </div>
+                    <div class="row">
+                        {{Form::label('address', 'Address:', ['class' => 'form-control bg-secondary col-sm-2'])}}
+                        {{Form::text('address', '', ['class' => 'form-control col-sm-10'])}}
+                    </div>
+                    <div class="row">
+                        {{Form::label('city', 'City:', ['class' => 'form-control bg-secondary col-sm-2'])}}
+                        {{Form::text('city', '', ['class' => 'form-control col-sm-10'])}}
+                    </div>
+                    <div class="row">
+                        {{Form::label('phone', 'Phone:', ['class' => 'form-control bg-secondary col-sm-2'])}}
+                        {{Form::text('phone', '', ['class' => 'form-control col-sm-10'])}}
+                    </div>
+                    <div class="row">
+                        {{Form::label('rate', 'Rate:', ['class' => 'form-control bg-secondary col-sm-2'])}}
+                        {{Form::text('rate', '', ['class' => 'form-control col-sm-10'])}}
+                    </div>
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-outline-light">Save changes</button>
+                    {{Form::submit('Submit', ['class' => 'btn btn-primary'])}}
                 </div>
+                {!! Form::close() !!}
             </div>
 
         </div>
