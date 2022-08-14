@@ -3,20 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Client;
 
-class ClientsController extends Controller
+class ProductsController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-    
     /**
      * Display a listing of the resource.
      *
@@ -24,8 +13,7 @@ class ClientsController extends Controller
      */
     public function index()
     {
-        $clients = Client::all();
-        return view('clients.index')->with('clients', $clients);
+        //
     }
 
     /**
@@ -46,21 +34,7 @@ class ClientsController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            //'item_name' => 'required',
-        ]);
-
-        $client = new Client;
-        $client->name = $request->input('name');
-        $client->Address = $request->input('address');
-        $client->City = $request->input('city');
-        $client->State = $request->input('state');
-        $client->Zip = $request->input('zip');
-        $client->Phone = $request->input('phone');
-        $client->Rate = $request->input('rate');
-        $client->save();
-
-        return redirect('clients')->with('success', 'Client Created');
+        //
     }
 
     /**
@@ -71,10 +45,7 @@ class ClientsController extends Controller
      */
     public function show($id)
     {
-        $client = Client::find($id);
-
-
-        return view('clients.show')->with('client', $client);
+        //
     }
 
     /**

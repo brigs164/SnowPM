@@ -104,6 +104,8 @@
                   <th>Name</th>
                   <th>Address</th>
                   <th>City</th>
+                  <th>State</th>
+                  <th>Zip</th>
                   <th>Phone</th>
                   <th>Rate</th>
                   <th></th>
@@ -112,6 +114,8 @@
                   <th>{{Form::text('name', '', ['class' => 'form-control'])}}</th>
                   <th>{{Form::text('address', '', ['class' => 'form-control'])}}</th>
                   <th>{{Form::text('city', '', ['class' => 'form-control'])}}</th>
+                  <th>{{Form::text('state', '', ['class' => 'form-control'])}}</th>
+                  <th>{{Form::text('zip', '', ['class' => 'form-control'])}}</th>
                   <th>{{Form::text('phone', '', ['class' => 'form-control'])}}</th>
                   <th>{{Form::text('rate', '', ['class' => 'form-control'])}}</th>
                   <th>{{Form::submit('Submit', ['class' => 'btn btn-primary'])}}</th>

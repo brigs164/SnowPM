@@ -18,6 +18,8 @@ class CreateClientsTable extends Migration
             $table->string('Name');
             $table->string('Address');
             $table->string('City');
+            $table->string('State');
+            $table->string('Zip');
             $table->string('Phone');
             $table->decimal('Rate', 16, 2);
             $table->decimal('Credit', 16, 2)->nullable();

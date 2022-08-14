@@ -205,6 +205,14 @@
                         {{Form::text('city', '', ['class' => 'form-control col-sm-10'])}}
                     </div>
                     <div class="row">
+                        {{Form::label('state', 'State:', ['class' => 'form-control bg-secondary col-sm-2'])}}
+                        {{Form::text('state', '', ['class' => 'form-control col-sm-10'])}}
+                    </div>
+                    <div class="row">
+                        {{Form::label('zip', 'Zip:', ['class' => 'form-control bg-secondary col-sm-2'])}}
+                        {{Form::text('zip', '', ['class' => 'form-control col-sm-10'])}}
+                    </div>
+                    <div class="row">
                         {{Form::label('phone', 'Phone:', ['class' => 'form-control bg-secondary col-sm-2'])}}
                         {{Form::text('phone', '', ['class' => 'form-control col-sm-10'])}}
                     </div>
