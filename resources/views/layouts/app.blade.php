@@ -24,6 +24,7 @@
             <li class="nav-item">
                 <a class="nav-link" data-widget="pushmenu" data-auto-collapse-size="1800" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
+            @include('layouts.topmenu')
         </ul>
 
         <ul class="navbar-nav ml-auto">
