@@ -15,7 +15,7 @@
 
     @stack('page_css')
 </head>
-    <body class="hold-transition layout-footer-fixed dark-mode">
+    <body class="hold-transition layout-footer-fixed layout-navbar-fixed dark-mode">
 <div class="wrapper">
     <!-- Main Header -->
     <nav class="main-header navbar navbar-expand navbar-dark navbar-light">
