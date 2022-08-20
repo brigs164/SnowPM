@@ -59,7 +59,7 @@
                 <!-- /.box-body -->
             </div>
         </div>
-        <div class="col-xs-12 col-md-10">
+        <div class="col-xs-12 col-lg-10">
             <div class="card card-primary card-tabs">
                 <div class="card-header p-0 pt-1">
                     <ul class="nav nav-tabs" id="customer-tab" role="tablist">
