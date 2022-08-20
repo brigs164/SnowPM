@@ -15,14 +15,14 @@
 
     @stack('page_css')
 </head>
-    <body class="hold-transition sidebar layout-fixed dark-mode">
+    <body class="hold-transition layout-fixed dark-mode">
 <div class="wrapper">
     <!-- Main Header -->
     <nav class="main-header navbar navbar-expand navbar-dark navbar-light">
         <!-- Left navbar links -->
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" data-widget="pushmenu" data-auto-collapse-size="1700" href="#" role="button"><i class="fas fa-bars"></i></a>
+                <a class="nav-link" data-widget="pushmenu"  data-auto-collapse-size="1800" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
         </ul>
 
