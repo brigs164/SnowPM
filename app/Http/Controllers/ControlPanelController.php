@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Client;
+use App\Models\ControlPanel;
 
-class ClientsController extends Controller
+class ControlPanelController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -16,7 +16,7 @@ class ClientsController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -24,8 +24,7 @@ class ClientsController extends Controller
      */
     public function index()
     {
-        $clients = Client::all();
-        return view('clients.index')->with('clients', $clients);
+        return view('controlpanel');
     }
 
     /**
@@ -47,26 +46,18 @@ class ClientsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
-            'address' => 'required',
-            'city' => 'required',
-            'state' => 'required',
-            'zip' => 'required',
-            'phone' => 'required',
-            'rate' => 'required',
+            //'item_name' => 'required',
         ]);
 
-        $client = new Client;
-        $client->name = $request->input('name');
-        $client->Address = $request->input('address');
-        $client->City = $request->input('city');
-        $client->State = $request->input('state');
-        $client->Zip = $request->input('zip');
-        $client->Phone = $request->input('phone');
-        $client->Rate = $request->input('rate');
-        $client->save();
+        $year1 = (int) $request->input('year');
+        $year2 = $year1 + 1;
 
-        return redirect('clients')->with('success', 'Client Created');
+        $settings = ControlPanel::latest()->first();
+        $settings->Year1 = $year1;
+        $settings->Year2 = $year2;
+        $settings->save();
+
+        return redirect('controlpanel')->with('success', 'Settings Updated');
     }
 
     /**
@@ -77,10 +68,7 @@ class ClientsController extends Controller
      */
     public function show($id)
     {
-        $client = Client::find($id);
-
-
-        return view('clients.show')->with('client', $client);
+        //
     }
 
     /**

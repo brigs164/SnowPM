@@ -22,7 +22,7 @@
   <section class="container-fluid">
     <div class="row">
       <div class="col-sm-12">
-        <div class="card">
+        <div class="card card-primary">
           <div class="card-header">
             <h3 class="card-title">Clients</h3>
           </div>
@@ -91,14 +91,14 @@
     </div>
     <div class="row">
       <div class="col-sm-12">
-        <div class="card">
+        <div class="card card-primary">
           <div class="card-header">
             <h3 class="card-title">New Client</h3>
           </div>
           <!-- /.box-header -->
-          <div class="card-body table-responsive">
+          <div class="card-body">
             {!! Form::open(['action' => 'App\Http\Controllers\ClientsController@store', 'method' => 'POST']) !!}
-            <table class="table table-striped">
+            <table class="table table-bordered table-striped">
               <tbody>
                 <tr>
                   <th>Name</th>

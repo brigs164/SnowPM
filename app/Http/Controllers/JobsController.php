@@ -3,9 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\ControlPanel;
 
-class ProductsController extends Controller
+class JobsController extends Controller
 {
+        /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +24,9 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //
+        $jobs = ControlPanel::JobsGetYear();
+
+        return view('jobs/index')->with('jobs', $jobs);
     }
 
     /**
@@ -23,7 +36,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -34,7 +47,19 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'description' => 'required',
+            'date' => 'required',
+        ]);
+
+        $job = new Job;
+        $job->Name = $request->input('name');
+        $job->Description = $request->input('description');
+        $job->Date = $request->input('date');
+        $job->save();
+
+        return redirect('jobs')->with('success', 'Job Created');
     }
 
     /**
