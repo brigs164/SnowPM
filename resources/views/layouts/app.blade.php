@@ -67,7 +67,6 @@
     <div class="content-wrapper">
         @yield('content_header')
         <section class="content">
-        <p id="demo"></p>
             @include('layouts.messages')
             @yield('content')
         </section>
@@ -83,16 +82,6 @@
 </div>
 
 <script src="{{ mix('js/app.js') }}" defer></script>
-
-
-
-<script>
-var w = window.innerWidth;
-var h = window.innerHeight;
-
-var x = document.getElementById("demo");
-x.innerHTML = "Browser width: " + w + ", height: " + h + ".";
-</script>
 
 @yield('third_party_scripts')
 
