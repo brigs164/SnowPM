@@ -23,7 +23,7 @@
 @section('content')
 <section class="container-fluid">
     <div class="row">
-        <div class="col-xs-12 col-l-3 col-xl-2">
+        <div class="col-xs-12 col-md-3 col-xl-2">
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Settings</h3>
@@ -59,7 +59,7 @@
                 <!-- /.box-body -->
             </div>
         </div>
-        <div class="col-xs-12 col-l-9 col-xl-10">
+        <div class="col-xs-12 col-md-9 col-xl-10">
             <div class="card card-primary card-tabs">
                 <div class="card-header p-0 pt-1">
                     <ul class="nav nav-tabs" id="customer-tab" role="tablist">
