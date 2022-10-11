@@ -66,7 +66,7 @@ class ClientsController extends Controller
         $client->Rate = $request->input('rate');
         $client->save();
 
-        return redirect('clients')->with('success', 'Client Created');
+        return redirect()->back()->with('success', 'Client Created');
     }
 
     /**

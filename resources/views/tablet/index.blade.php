@@ -144,13 +144,17 @@
                     </button>
                 </div>
                 <div class="modal-body bg-secondary">
-                    <p>Date</p>
-                    <p>Customer</p>
+                {!! Form::open(['action' => 'App\Http\Controllers\JobsController@store', 'method' => 'POST']) !!}
+                    <div class="row">
+                        {{Form::label('custid', 'Customer:', ['class' => 'form-control bg-secondary col-sm-3'])}}
+                        {{Form::select('custid', $clients, null, ['class' => 'form-control col-sm-9']) }}
+                    </div>
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-outline-light">Save changes</button>
+                    {{Form::submit('Submit', ['class' => 'btn btn-outline-light'])}}
                 </div>
+                {!! Form::close() !!}
             </div>
 
         </div>
@@ -223,7 +227,7 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-                    {{Form::submit('Submit', ['class' => 'btn btn-primary'])}}
+                    {{Form::submit('Submit', ['class' => 'btn btn-outline-light'])}}
                 </div>
                 {!! Form::close() !!}
             </div>

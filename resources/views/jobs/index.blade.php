@@ -27,9 +27,20 @@
         <h3 class="card-title">New Job</h3>
       </div>
       <div class="card-body">
-        <div class="col-lg-1 col-lg-offset-5">
-          <a href="/jobs/create" class="btn btn-block btn-primary" role="button">New Job</a>
-        </div>
+        {!! Form::open(['action' => 'App\Http\Controllers\JobsController@store', 'method' => 'POST']) !!}
+          <table class="table table-striped">
+            <tbody>
+              <tr>
+                <th>Date</th>
+                <th>Client</th>
+              </tr>
+              <tr>
+                <th>{{Form::select('custid', $clients, null, ['class' => 'form-control']) }}</th>
+                <th>{{Form::submit('Submit', ['class' => 'btn btn-primary'])}}</th>
+              </tr>
+            </tbody>
+          </table>
+        {!! Form::close() !!}
       </div>
     </div>
     @for ($i = 0; $i < 4; $i++)

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Client;
 
 class TabletController extends Controller
 {
@@ -22,6 +23,8 @@ class TabletController extends Controller
      */
     public function index()
     {
-        return view('tablet/index');
+        $clients = Client::all()->where('Status', '1')->pluck('Name', 'id');
+
+        return view('tablet/index')->with('clients', $clients);
     }
 }
