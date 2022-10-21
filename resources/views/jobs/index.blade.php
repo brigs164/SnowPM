@@ -31,11 +31,13 @@
           <table class="table table-striped">
             <tbody>
               <tr>
-                <th>Date</th>
                 <th>Client</th>
+                <th>Product</th>
+                <th></th>
               </tr>
               <tr>
                 <th>{{Form::select('custid', $clients, null, ['class' => 'form-control']) }}</th>
+                <th>{{Form::select('prodid', $products, null, ['class' => 'form-control']) }}</th>
                 <th>{{Form::submit('Submit', ['class' => 'btn btn-primary'])}}</th>
               </tr>
             </tbody>
@@ -72,12 +74,13 @@
                   <th>Date</th>
                   <th>Client</th>
                   <th>Status</th>
+                  <th>Options</th>
                 </tr>
                 </thead>
                 <tbody>
                   @if(count($jobs) > 0)
                     @foreach($jobs as $job)
-                      @if ($job->job_status->Status == $i)
+                      @if ($job->Status == $i)
                         <tr>
                           <td>
                             {{$job->id}}
@@ -86,26 +89,29 @@
                             {{$job->JobDescription}}
                           </td>
                           <td>
-                            {{$job->Date}}
+                            {{\Carbon\Carbon::parse($job->Date)->format('m-d-Y')}}
                           </td>
                           <td>
                             {{$job->client->Name}}
                           </td>
                           <td>
                             <?php
-                                if($job->job_status->Status == "0"){
-                                    echo "<span class='label bg-gray'><big>Open</big></span>";
+                                if($job->Status == "0"){
+                                    echo "<span class='badge bg-danger'><big>Open</big></span>";
                                 }
-                                else if($job->job_status->Status == "1"){
-                                    echo "<span class='label label-warning'><big>Closed</big></span>";
+                                else if($job->Status == "1"){
+                                    echo "<span class='badge badge-warning'><big>Completed</big></span>";
                                 }
-                                else if($job->job_status->Status == "2"){
-                                    echo "<span class='label label-info'><big>Invoiced</big></span>";
+                                else if($job->Status == "2"){
+                                    echo "<span class='badge badge-info'><big>Invoiced</big></span>";
                                 }
-                                else if($job->job_status->Status == "3"){
-                                    echo "<span class='label label-success'><big>Paid</big></span>";
+                                else if($job->Status == "3"){
+                                    echo "<span class='badge badge-success'><big>Paid</big></span>";
                                 }
                             ?>
+                          </td>
+                          <td>
+                           <a href="/jobs/{{$job->id}}" class="badge bg-blue"><big>View</big></a>
                           </td>
                         </tr>
                       @endif
@@ -119,13 +125,6 @@
                   @endif
                 </tbody>
                 <tfoot>
-                  <tr>
-                    <th>ID</th>
-                    <th>Description</th>
-                    <th>Date</th>
-                    <th>Client</th>
-                    <th>Status</th>
-                  </tr>
                 </tfoot>
               </table>
             </div>

@@ -8,7 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Client extends Model
 {
     use HasFactory;
-    
+
+    public function jobs()
+    {
+        return $this->hasMany(Job::class);
+    }
+
     //Other Functions
     public function getClientIDAttribute() {
         return str_pad($this->id, 5, '0', STR_PAD_LEFT);

@@ -14,6 +14,11 @@
     </a>
 </li>
 <li class="nav-item">
+    <a href="{{ route('products.index') }}" class="{{ (Route::is('products.index')) ? 'nav-link active' : 'nav-link'}}">
+        <p>Products</p>
+    </a>
+</li>
+<li class="nav-item">
     <a href="{{ route('tablet') }}" class="{{ (Route::is('tablet')) ? 'nav-link active' : 'nav-link'}}">
         <p>Tablet-Mode</p>
     </a>

@@ -17,6 +17,12 @@
     </a>
 </li>
 <li class="nav-item">
+    <a href="{{ route('products.index') }}" class="{{ (Route::is('products.index')) ? 'nav-link active' : 'nav-link'}}">
+        <i class="nav-icon fa fa-cubes"></i>
+        <p>Products</p>
+    </a>
+</li>
+<li class="nav-item">
     <a href="{{ route('tablet') }}" class="{{ (Route::is('tablet')) ? 'nav-link active' : 'nav-link'}}">
         <i class="nav-icon fa fa-tablet"></i>
         <p>Tablet-Mode</p>

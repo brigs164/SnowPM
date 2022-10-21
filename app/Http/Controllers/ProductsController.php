@@ -3,24 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\ControlPanel;
-use App\Models\Client;
-use App\Models\Job;
-use App\Models\Job_Details;
 use App\Models\Product;
 
-class JobsController extends Controller
+class ProductsController extends Controller
 {
-        /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -28,11 +14,8 @@ class JobsController extends Controller
      */
     public function index()
     {
-        $jobs = ControlPanel::JobsGetYear();
-        $clients = Client::all()->where('Status', '1')->pluck('Name', 'id');
-        $products = Product::all()->pluck('Name', 'id');
-
-        return view('jobs/index')->with('jobs', $jobs)->with('clients', $clients)->with('products', $products);
+        $products = Product::all();
+        return view('products.index')->with('products', $products);
     }
 
     /**
@@ -42,9 +25,7 @@ class JobsController extends Controller
      */
     public function create()
     {
-        $clients = Client::all()->where('Status', '1')->pluck('Name', 'id');
-
-        return view ('jobs.create')->with('clients', $clients);
+        //
     }
 
     /**
@@ -56,24 +37,15 @@ class JobsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'custid' => 'required',
+            //'custid' => 'required',
         ]);
 
-        $job = new Job;
-        $job->date = date('Y-m-d');
-        $job->status = '0';
-        $job->custid = $request->input('custid');
-        $job->emplid = 1;
-        $job->save();
+        $product = new Product;
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        $product->save();
 
-        $job_detail = new Job_Details;
-        $job_detail->jobid = Job::latest()->first()->id;
-        $job_detail->productid = $request->input('prodid');
-        //$job_detail->price = $request->input('price');
-        //$job_detail->quantity = $request->input('quantity');
-        $job_detail->save();
-
-        return redirect()->back()->with('success', 'Job Created');
+        return redirect()->back()->with('success', 'Product Created');
     }
 
     /**
@@ -84,9 +56,7 @@ class JobsController extends Controller
      */
     public function show($id)
     {
-        $job = Job::find($id);
-
-        return view('jobs.show')->with('job', $job);
+        //
     }
 
     /**
