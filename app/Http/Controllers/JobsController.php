@@ -59,18 +59,21 @@ class JobsController extends Controller
             'custid' => 'required',
         ]);
 
+        $customerID = $request->input('custid');
+
         $job = new Job;
         $job->date = date('Y-m-d');
         $job->status = '0';
-        $job->custid = $request->input('custid');
+        $job->custid = $customerID;
         $job->emplid = 1;
         $job->save();
 
         $job_detail = new Job_Details;
         $job_detail->jobid = Job::latest()->first()->id;
         $job_detail->productid = $request->input('prodid');
-        //$job_detail->price = $request->input('price');
-        //$job_detail->quantity = $request->input('quantity');
+        $job_detail->price = Client::where('id', $customerID)->value('Rate');
+        $job_detail->quantity = 1;
+
         $job_detail->save();
 
         return redirect()->back()->with('success', 'Job Created');

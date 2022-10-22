@@ -25,24 +25,33 @@
     <div class="card card-primary">
       <div class="card-header">
         <h3 class="card-title">New Job</h3>
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+            </button>
+        </div>
       </div>
-      <div class="card-body">
-        {!! Form::open(['action' => 'App\Http\Controllers\JobsController@store', 'method' => 'POST']) !!}
-          <table class="table table-striped">
-            <tbody>
-              <tr>
-                <th>Client</th>
-                <th>Product</th>
-                <th></th>
-              </tr>
-              <tr>
-                <th>{{Form::select('custid', $clients, null, ['class' => 'form-control']) }}</th>
-                <th>{{Form::select('prodid', $products, null, ['class' => 'form-control']) }}</th>
-                <th>{{Form::submit('Submit', ['class' => 'btn btn-primary'])}}</th>
-              </tr>
-            </tbody>
-          </table>
-        {!! Form::close() !!}
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          {!! Form::open(['action' => 'App\Http\Controllers\JobsController@store', 'method' => 'POST']) !!}
+            <table class="table m-0">
+              <thead>
+                <tr>
+                  <th>Client</th>
+                  <th>Product</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{Form::select('custid', $clients, null, ['class' => 'form-control']) }}</td>
+                  <td>{{Form::select('prodid', $products, null, ['class' => 'form-control']) }}</td>
+                  <td>{{Form::submit('Submit', ['class' => 'btn btn-block btn-primary'])}}</td>
+                </tr>
+              </tbody>
+            </table>
+          {!! Form::close() !!}
+        </div>
       </div>
     </div>
     @for ($i = 0; $i < 4; $i++)
@@ -63,70 +72,77 @@
                     Paid
                 @endif
               </h3>
+              <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus"></i>
+                  </button>
+              </div>
             </div>
             <!-- /.box-header -->
-            <div class="card-body">
-              <table id="@php echo "joblist" . $i @endphp" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Description</th>
-                  <th>Date</th>
-                  <th>Client</th>
-                  <th>Status</th>
-                  <th>Options</th>
-                </tr>
-                </thead>
-                <tbody>
-                  @if(count($jobs) > 0)
-                    @foreach($jobs as $job)
-                      @if ($job->Status == $i)
-                        <tr>
-                          <td>
-                            {{$job->id}}
-                          </td>
-                          <td>
-                            {{$job->JobDescription}}
-                          </td>
-                          <td>
-                            {{\Carbon\Carbon::parse($job->Date)->format('m-d-Y')}}
-                          </td>
-                          <td>
-                            {{$job->client->Name}}
-                          </td>
-                          <td>
-                            <?php
-                                if($job->Status == "0"){
-                                    echo "<span class='badge bg-danger'><big>Open</big></span>";
-                                }
-                                else if($job->Status == "1"){
-                                    echo "<span class='badge badge-warning'><big>Completed</big></span>";
-                                }
-                                else if($job->Status == "2"){
-                                    echo "<span class='badge badge-info'><big>Invoiced</big></span>";
-                                }
-                                else if($job->Status == "3"){
-                                    echo "<span class='badge badge-success'><big>Paid</big></span>";
-                                }
-                            ?>
-                          </td>
-                          <td>
-                           <a href="/jobs/{{$job->id}}" class="badge bg-blue"><big>View</big></a>
-                          </td>
-                        </tr>
-                      @endif
-                    @endforeach
-                  @else
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table id="@php echo "joblist" . $i @endphp" class="table m-0">
+                  <thead>
                     <tr>
-                      <td>
-                        No Invoices
-                      </td>
+                      <th>ID</th>
+                      <th>Description</th>
+                      <th>Date</th>
+                      <th>Client</th>
+                      <th>Status</th>
+                      <th>Options</th>
                     </tr>
-                  @endif
-                </tbody>
-                <tfoot>
-                </tfoot>
-              </table>
+                  </thead>
+                  <tbody>
+                    @if(count($jobs) > 0)
+                      @foreach($jobs as $job)
+                        @if ($job->Status == $i)
+                          <tr>
+                            <td>
+                              {{$job->id}}
+                            </td>
+                            <td>
+                              {{$job->JobDescription}}
+                            </td>
+                            <td>
+                              {{\Carbon\Carbon::parse($job->Date)->format('m-d-Y')}}
+                            </td>
+                            <td>
+                              {{$job->client->Name}}
+                            </td>
+                            <td>
+                              <?php
+                                  if($job->Status == "0"){
+                                      echo "<span class='badge btn-block bg-danger'><big>Open</big></span>";
+                                  }
+                                  else if($job->Status == "1"){
+                                      echo "<span class='badge btn-block badge-warning'><big>Completed</big></span>";
+                                  }
+                                  else if($job->Status == "2"){
+                                      echo "<span class='badge btn-block badge-info'><big>Invoiced</big></span>";
+                                  }
+                                  else if($job->Status == "3"){
+                                      echo "<span class='badge btn-block badge-success'><big>Paid</big></span>";
+                                  }
+                              ?>
+                            </td>
+                            <td>
+                            <a href="/jobs/{{$job->id}}" class="badge btn-block bg-blue"><big>View</big></a>
+                            </td>
+                          </tr>
+                        @endif
+                      @endforeach
+                    @else
+                      <tr>
+                        <td>
+                          No Invoices
+                        </td>
+                      </tr>
+                    @endif
+                  </tbody>
+                  <tfoot>
+                  </tfoot>
+                </table>
+              </div>
             </div>
             <!-- /.box-body -->
           </div>

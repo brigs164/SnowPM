@@ -44,95 +44,103 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header border-transparent">
-                        <h3 class="card-title">Latest Orders</h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                            <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                <i class="fas fa-times"></i>
-                            </button>
+        @for ($i = 0; $i < 4; $i++)
+            @if ($i == 0 || $i == 2)
+                <div class="row">
+            @endif
+                <div class="col-sm-12 col-lg-6">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                @if ($i == 0)
+                                    Open Jobs
+                                @elseif ($i == 1)
+                                    Completed Jobs
+                                @elseif ($i == 2)
+                                    Invoiced
+                                @else
+                                    Paid
+                                @endif
+                            </h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card-body p-0">
-                        <div class="table-responsive">
-                            <table class="table m-0">
-                                <thead>
-                                    <tr>
-                                        <th>Order ID</th>
-                                        <th>Item</th>
-                                        <th>Status</th>
-                                        <th>Popularity</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                        <td>Call of Duty IV</td>
-                                        <td><span class="badge badge-success">Shipped</span></td>
-                                        <td>
-                                            <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <!-- /.box-header -->
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table id="@php echo "joblist" . $i @endphp" class="table m-0">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Description</th>
+                                            <th>Date</th>
+                                            <th>Client</th>
+                                            <th>Status</th>
+                                            <th>Options</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if(count($jobs) > 0)
+                                            @foreach($jobs as $job)
+                                                @if ($job->Status == $i)
+                                                    <tr>
+                                                        <td>
+                                                            {{$job->id}}
+                                                        </td>
+                                                        <td>
+                                                            {{$job->JobDescription}}
+                                                        </td>
+                                                        <td>
+                                                            {{\Carbon\Carbon::parse($job->Date)->format('m-d-Y')}}
+                                                        </td>
+                                                        <td>
+                                                            {{$job->client->Name}}
+                                                        </td>
+                                                        <td>
+                                                            <?php
+                                                                if($job->Status == "0"){
+                                                                    echo "<span class='badge btn-block bg-danger'><big>Open</big></span>";
+                                                                }
+                                                                else if($job->Status == "1"){
+                                                                    echo "<span class='badge btn-block badge-warning'><big>Completed</big></span>";
+                                                                }
+                                                                else if($job->Status == "2"){
+                                                                    echo "<span class='badge btn-block badge-info'><big>Invoiced</big></span>";
+                                                                }
+                                                                else if($job->Status == "3"){
+                                                                    echo "<span class='badge btn-block badge-success'><big>Paid</big></span>";
+                                                                }
+                                                            ?>
+                                                        </td>
+                                                        <td>
+                                                            <a href="/jobs/{{$job->id}}" class="badge btn-block bg-blue"><big>View</big></a>
+                                                        </td>
+                                                    </tr>
+                                                @endif
+                                            @endforeach
+                                        @else
+                                            <tr>
+                                                <td>
+                                                    No Invoices
+                                                </td>
+                                            </tr>
+                                        @endif
+                                    </tbody>
+                                    <tfoot>
+                                    </tfoot>
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card-footer clearfix">
-                        <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a>
-                        <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All Orders</a>
+                        <!-- /.box-body -->
                     </div>
                 </div>
-            </div> 
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header border-transparent">
-                        <h3 class="card-title">Latest Orders</h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                            <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-body p-0">
-                        <div class="table-responsive">
-                            <table class="table m-0">
-                                <thead>
-                                    <tr>
-                                        <th>Order ID</th>
-                                        <th>Item</th>
-                                        <th>Status</th>
-                                        <th>Popularity</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                        <td>Call of Duty IV</td>
-                                        <td><span class="badge badge-success">Shipped</span></td>
-                                        <td>
-                                            <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="card-footer clearfix">
-                        <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a>
-                        <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All Orders</a>
-                    </div>
+                @if ($i == 1 || $i == 3)
                 </div>
-            </div>
-        </div>
-    </div>
+            @endif
+        @endfor
 
     <div class="modal fade" id="new_job" style="display: none;" aria-modal="true">
         <div class="modal-dialog">

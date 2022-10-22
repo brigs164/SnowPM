@@ -31,7 +31,7 @@
                 <!-- /.box-header -->
                 <div class="card-body p-1">
                     {!! Form::open(['action' => 'App\Http\Controllers\ControlPanelController@store', 'method' => 'POST']) !!}
-                    <table class="table table-striped">
+                    <table class="table m-0">
                         <tbody>
                             <tr>
                                 <td class="">Year Setting</td>
@@ -43,15 +43,15 @@
                             </tr>
                             <tr>
                                 <td>Site Version</td>
-                                <td class="text-right">v1.00.06a</td>
+                                <td class="text-right">v1.00.07a</td>
                             </tr>
                             <tr>
                                 <td>phpMyAdmin</td>
-                                <td class="text-right"><a class="btn btn-primary" role="button" href="../../phpmyadmin">Access</a>
+                                <td class="text-right"><a class="btn btn-block btn-primary" role="button" href="../../phpmyadmin">Access</a>
                             </tr>
                             <tr>
-                                <td>{{Form::submit('Save Settings', ['class' => 'btn btn-primary'])}}</td>
                                 <td></td>
+                                <td>{{Form::submit('Save Settings', ['class' => 'btn btn-block btn-primary'])}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -75,34 +75,40 @@
                 <div class="card-body no-padding">
                     <div class="tab-content">
                         <div class="tab-pane active" id="Accounts">
-                            <div class="card-body no-padding">
-                                <table class="table table-bordered table-striped">
-                                    <tbody>
-                                        <tr>
-                                            <th>Account</th>
-                                            <th>Description</th>
-                                            <th>Begining Balance</th>
-                                        <tr>
-                                    </tbody>
-                                </table>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table m-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Account</th>
+                                                <th>Description</th>
+                                                <th>Begining Balance</th>
+                                            <tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                         <div class="tab-pane" id="Users">
-                            <div class="card-body no-padding">
-                                <table class="table table-bordered table-striped">
-                                    <tbody>
-                                        <tr>
-                                            <th>User Groups</th>
-                                            <th></th>
-                                        </tr>
-                                    </tbody>
-                                    <tbody>
-                                        <tr>
-                                            <th>Users</th>
-                                            <th>User Group</th>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table m-0">
+                                        <thead>
+                                            <tr>
+                                                <th>User Groups</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Users</th>
+                                                <th>User Group</th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
