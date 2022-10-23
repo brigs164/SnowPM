@@ -91,13 +91,13 @@
                                                         <td class="col-1">
                                                             {{$job->id}}
                                                         </td>
-                                                        <td class="col-4">
+                                                        <td class="col-3">
                                                             {{$job->JobDescription}}
                                                         </td>
                                                         <td class="col-2">
                                                             {{\Carbon\Carbon::parse($job->Date)->format('m-d-Y')}}
                                                         </td>
-                                                        <td class="col-2">
+                                                        <td class="col-3">
                                                             {{$job->client->Name}}
                                                         </td>
                                                         <td class="col-1">
