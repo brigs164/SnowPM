@@ -94,7 +94,7 @@
                                                         <td class="col-3">
                                                             {{$job->JobDescription}}
                                                         </td>
-                                                        <td class="col-2">
+                                                        <td class="col-3">
                                                             {{\Carbon\Carbon::parse($job->Date)->format('m-d-Y')}}
                                                         </td>
                                                         <td class="col-3">
@@ -116,7 +116,7 @@
                                                                 }
                                                             ?>
                                                         </td>
-                                                        <td class="col-2">
+                                                        <td class="col-1">
                                                             <div class="btn-group">
                                                                 <a href="/jobs/{{$job->id}}" class="btn btn-xs bg-blue" role="button"><big>View</big></a>
                                                                 <a href="/jobs/{{$job->id}}" class="btn btn-xs bg-green" role="button"><big>Complete</big></a>
