@@ -27,30 +27,58 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">
+                        Client
                     </h3>
                 </div>
-            <!-- /.box-header -->
+                <!-- /.box-header -->
                 <div class="card-body">
-                    Customer: {{$job->client->Name}}<Br>
-                    Address: {{$job->client->Address}}, {{$job->client->City}}, {{$job->client->Zip}}<br>
-                    Phone: {{$job->client->PhoneNumber}}<br>
-                    Job Date: {{\Carbon\Carbon::parse($job->Date)->format('m-d-Y')}}<br>
-                    Job ID: {{$job->id}}<br>
-                    Job Status: {{$job->Status}}<br>
-                    Employee ID: {{$job->EmplID}}
+                    <p>Customer: {{$job->client->Name}}</p>
+                    <p>Address: {{$job->client->Address}}, {{$job->client->City}}, {{$job->client->Zip}}</p>
+                    <p>Phone: {{$job->client->PhoneNumber}}</p>
                 </div>
             <!-- /.box-body -->
             </div>
         </div>
         <div class="col-lg-4">
             <div class="card">
+                <div class="card-body">
+                    <button type="button" class="btn btn-block bg-green btn-lg" data-toggle="modal" data-target="#new_job">Complete Job</button>
+                    <button type="button" class="btn btn-block bg-yellow btn-lg" data-toggle="modal" data-target="#new_job">Edit Job</button>
+                    <button type="button" class="btn btn-block bg-red btn-lg" data-toggle="modal" data-target="#new_job">Delete Job</button>
+                </div>
+            <!-- /.box-body -->
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">
+                        Job
                     </h3>
                 </div>
-            <!-- /.box-header -->
+                <!-- /.box-header -->
                 <div class="card-body">
-                    
+                    <p>Job ID: {{$job->id}}</p>
+                    <p>Job Date: {{\Carbon\Carbon::parse($job->Date)->format('m-d-Y')}}</p>
+                    <p>Job Status: {{$job->Status}}</p>
+                    <p>Product ID: {{$job_detail->ProductID}}</p>
+                    <p>Price: {{$job_detail->Price}}</p>
+                    <p>Quantity: {{$job_detail->Quantity}}</p>
+                    <p>Employee ID: {{$job->EmplID}}</p>
+                </div>
+            <!-- /.box-body -->
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <?php
+                        $address = $job->client->Address . " " . $job->client->city . " " . $job->client->state . " " . $job->client->zip;
+                        $address = str_replace(" ", "+", $address);
+                    ?>
+                    <iframe width="100%" height="600" src="https://maps.google.com/maps?q=<?php echo $address; ?>&output=embed"></iframe>
                 </div>
             <!-- /.box-body -->
             </div>

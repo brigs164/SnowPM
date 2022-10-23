@@ -88,8 +88,9 @@ class JobsController extends Controller
     public function show($id)
     {
         $job = Job::find($id);
+        $job_detail = Job_Details::where('JobID', $id)->first();
 
-        return view('jobs.show')->with('job', $job);
+        return view('jobs.show')->with('job', $job)->with('job_detail', $job_detail);
     }
 
     /**

@@ -44,6 +44,7 @@
                 </div>
             </div>
         </div>
+
         @for ($i = 0; $i < 4; $i++)
             @if ($i == 0 || $i == 2)
                 <div class="row">
@@ -87,19 +88,19 @@
                                             @foreach($jobs as $job)
                                                 @if ($job->Status == $i)
                                                     <tr>
-                                                        <td>
+                                                        <td class="col-1">
                                                             {{$job->id}}
                                                         </td>
-                                                        <td>
+                                                        <td class="col-4">
                                                             {{$job->JobDescription}}
                                                         </td>
-                                                        <td>
+                                                        <td class="col-2">
                                                             {{\Carbon\Carbon::parse($job->Date)->format('m-d-Y')}}
                                                         </td>
-                                                        <td>
+                                                        <td class="col-2">
                                                             {{$job->client->Name}}
                                                         </td>
-                                                        <td>
+                                                        <td class="col-1">
                                                             <?php
                                                                 if($job->Status == "0"){
                                                                     echo "<span class='badge btn-block bg-danger'><big>Open</big></span>";
@@ -115,8 +116,12 @@
                                                                 }
                                                             ?>
                                                         </td>
-                                                        <td>
-                                                            <a href="/jobs/{{$job->id}}" class="badge btn-block bg-blue"><big>View</big></a>
+                                                        <td class="col-2">
+                                                            <div class="btn-group">
+                                                                <a href="/jobs/{{$job->id}}" class="btn btn-xs bg-blue" role="button"><big>View</big></a>
+                                                                <a href="/jobs/{{$job->id}}" class="btn btn-xs bg-green" role="button"><big>Complete</big></a>
+                                                                <a href="/jobs/{{$job->id}}" class="btn btn-xs bg-red" role="button"><big>Delete</big></a>
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                 @endif
@@ -156,6 +161,10 @@
                     <div class="row">
                         {{Form::label('custid', 'Customer:', ['class' => 'form-control bg-secondary col-sm-3'])}}
                         {{Form::select('custid', $clients, null, ['class' => 'form-control col-sm-9']) }}
+                    </div>
+                    <div class="row">
+                        {{Form::label('prodid', 'Product:', ['class' => 'form-control bg-secondary col-sm-3'])}}
+                        {{Form::select('prodid', $products, null, ['class' => 'form-control col-sm-9']) }}
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">

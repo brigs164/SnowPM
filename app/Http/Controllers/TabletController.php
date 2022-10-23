@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Client;
 use App\Models\ControlPanel;
+use App\Models\Product;
 
 class TabletController extends Controller
 {
@@ -26,7 +27,8 @@ class TabletController extends Controller
     {
         $jobs = ControlPanel::JobsGetYear();
         $clients = Client::all()->where('Status', '1')->pluck('Name', 'id');
+        $products = Product::all()->pluck('Name', 'id');
 
-        return view('tablet/index')->with('jobs', $jobs)->with('clients', $clients);
+        return view('tablet/index')->with('jobs', $jobs)->with('clients', $clients)->with('products', $products);
     }
 }
