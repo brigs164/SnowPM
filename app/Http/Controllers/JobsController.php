@@ -30,7 +30,7 @@ class JobsController extends Controller
     {
         $jobs = ControlPanel::JobsGetYear();
         $clients = Client::all()->where('Status', '1')->pluck('Name', 'id');
-        $products = Product::all()->pluck('Name', 'id');
+        $products = Product::all()->pluck('Name', 'id')->reverse();
 
         return view('jobs/index')->with('jobs', $jobs)->with('clients', $clients)->with('products', $products);
     }
@@ -113,7 +113,23 @@ class JobsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        $id = $request->input('jobid');
+
+        $job = Job::find($id);
+
+        if ($job->status == 0) {
+            $job->status = '1';
+            echo 'a';
+        }
+        else if ($job->status == 1){
+            $job->status = '2';
+            echo 'b';
+        }
+
+        $job->save();
+        
+        echo $job->status;
     }
 
     /**

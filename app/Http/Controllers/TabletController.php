@@ -27,7 +27,7 @@ class TabletController extends Controller
     {
         $jobs = ControlPanel::JobsGetYear();
         $clients = Client::all()->where('Status', '1')->pluck('Name', 'id');
-        $products = Product::all()->pluck('Name', 'id');
+        $products = Product::all()->pluck('Name', 'id')->reverse();
 
         return view('tablet/index')->with('jobs', $jobs)->with('clients', $clients)->with('products', $products);
     }

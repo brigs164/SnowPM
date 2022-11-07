@@ -27,6 +27,9 @@
                         <button type="button" class="btn btn-block bg-blue btn-lg" data-toggle="modal" data-target="#new_job">New Job</button>
                     </div>
                     <div class="col-lg-2 col-6">
+                        <button type="button" class="btn btn-block bg-info btn-lg" data-toggle="modal" data-target="#new_product">New Product</button>
+                    </div>
+                    <div class="col-lg-2 col-6">
                         <button type="button" class="btn btn-block bg-navy btn-lg" data-toggle="modal" data-target="#new_expense">New Expense</button>
                     </div>
                     <div class="col-lg-2 col-6">
@@ -37,9 +40,6 @@
                     </div>
                     <div class="col-lg-2 col-6">
                         <button type="button" class="btn btn-block bg-warning btn-lg" data-toggle="modal" data-target="#accounts">Accounts</button>
-                    </div>
-                    <div class="col-lg-2 col-6">
-                        <button type="button" class="btn btn-block bg-danger btn-lg">????</button>
                     </div>
                 </div>
             </div>
@@ -117,11 +117,25 @@
                                                             ?>
                                                         </td>
                                                         <td class="col-1">
+                                                            {!! Form::open(['action' => ['App\Http\Controllers\JobsController@update', $job->id], 'method' => 'POST']) !!}   
                                                             <div class="btn-group">
-                                                                <a href="/jobs/{{$job->id}}" class="btn btn-xs bg-blue" role="button"><big>View</big></a>
-                                                                <a href="/jobs/{{$job->id}}" class="btn btn-xs bg-green" role="button"><big>Complete</big></a>
-                                                                <a href="/jobs/{{$job->id}}" class="btn btn-xs bg-red" role="button"><big>Delete</big></a>
+                                                                <a href="/jobs/{{$job->id}}" class="btn btn-sm bg-blue" role="button">View</a>
+                                                                @if($job->Status == "0")
+                                                                    {{Form::hidden('jobid', $job->id) }}
+                                                                    {{Form::hidden('_method', 'PUT') }}
+                                                                    {{Form::submit('Complete', ['class' => 'btn btn-sm bg-green'])}}
+                                                                @elseif($job->Status == "1")
+                                                                    {{Form::hidden('jobid', $job->id) }}
+                                                                    {{Form::hidden('_method', 'PUT') }}
+                                                                    {{Form::submit('Invoice', ['class' => 'btn btn-sm bg-green'])}}
+                                                                @elseif($job->Status == "2")
+
+                                                                @elseif($job->Status == "3")
+
+                                                                @endif
+                                                                <a href="/jobs/{{$job->id}}" class="btn btn-sm bg-red" role="button">Delete</a>
                                                             </div>
+                                                            {!! Form::close() !!}
                                                         </td>
                                                     </tr>
                                                 @endif
@@ -173,9 +187,36 @@
                 </div>
                 {!! Form::close() !!}
             </div>
-
         </div>
+    </div>
 
+    <div class="modal fade" id="new_product" style="display: none;" aria-modal="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-info">
+                    <h4 class="modal-title">New Product</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body bg-secondary">
+                {!! Form::open(['action' => 'App\Http\Controllers\ProductsController@store', 'method' => 'POST']) !!}
+                    <div class="row">
+                        {{Form::label('name', 'Name:', ['class' => 'form-control bg-secondary col-sm-3'])}}
+                        {{Form::text('name', '', ['class' => 'form-control col-sm-9'])}}
+                    </div>
+                    <div class="row">
+                        {{Form::label('description', 'Description:', ['class' => 'form-control bg-secondary col-sm-3'])}}
+                        {{Form::text('description', '', ['class' => 'form-control col-sm-9'])}}
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                    {{Form::submit('Submit', ['class' => 'btn btn-outline-light'])}}
+                </div>
+                {!! Form::close() !!}
+            </div>
+        </div>
     </div>
 
     <div class="modal fade" id="new_expense" style="display: none;" aria-modal="true">
@@ -197,9 +238,7 @@
                     <button type="button" class="btn btn-outline-light">Save changes</button>
                 </div>
             </div>
-
         </div>
-
     </div>
 
     <div class="modal fade" id="new_customer" style="display: none;" aria-modal="true">
@@ -248,9 +287,7 @@
                 </div>
                 {!! Form::close() !!}
             </div>
-
         </div>
-
     </div>
 
     <div class="modal fade" id="payment" style="display: none;" aria-modal="true">
@@ -272,9 +309,7 @@
                     <button type="button" class="btn btn-outline-light">Save changes</button>
                 </div>
             </div>
-
         </div>
-
     </div>
 
     <div class="modal fade" id="accounts" style="display: none;" aria-modal="true">
@@ -295,8 +330,6 @@
                     <button type="button" class="btn btn-outline-light">Save changes</button>
                 </div>
             </div>
-
         </div>
-
     </div>
 @endsection

@@ -14,7 +14,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::all()->reverse();
         return view('products.index')->with('products', $products);
     }
 
