@@ -118,18 +118,24 @@ class JobsController extends Controller
 
         $job = Job::find($id);
 
-        if ($job->status == 0) {
-            $job->status = '1';
-            echo 'a';
+        if ($job->Status == 0) {
+            $job->Status = '1';
+            $job->save();
+            return redirect()->back()->with('success', 'Job Completed');
         }
-        else if ($job->status == 1){
-            $job->status = '2';
-            echo 'b';
+        else if ($job->Status == 1){
+            $job->Status = '2';
+            $job->save();
+            return redirect()->back()->with('success', 'Job Invoiced');
+        }
+        else if ($job->Status == 2){
+            $job->Status = '3';
+            $job->save();
+            return redirect()->back()->with('success', 'Job Paid');
         }
 
-        $job->save();
         
-        echo $job->status;
+        
     }
 
     /**

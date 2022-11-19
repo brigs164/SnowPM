@@ -91,7 +91,7 @@
                                                         <td class="col-1">
                                                             {{$job->id}}
                                                         </td>
-                                                        <td class="col-3">
+                                                        <td class="col-4">
                                                             {{$job->JobDescription}}
                                                         </td>
                                                         <td class="col-2">
@@ -124,16 +124,16 @@
                                                                     {{Form::hidden('jobid', $job->id) }}
                                                                     {{Form::hidden('_method', 'PUT') }}
                                                                     {{Form::submit('Complete', ['class' => 'btn btn-sm bg-green'])}}
+                                                                    <a href="/jobs/{{$job->id}}" class="btn btn-sm bg-red" role="button">Delete</a>
                                                                 @elseif($job->Status == "1")
                                                                     {{Form::hidden('jobid', $job->id) }}
                                                                     {{Form::hidden('_method', 'PUT') }}
                                                                     {{Form::submit('Invoice', ['class' => 'btn btn-sm bg-green'])}}
                                                                 @elseif($job->Status == "2")
-
-                                                                @elseif($job->Status == "3")
-
+                                                                    {{Form::hidden('jobid', $job->id) }}
+                                                                    {{Form::hidden('_method', 'PUT') }}
+                                                                    {{Form::submit('Paid', ['class' => 'btn btn-sm bg-green'])}}
                                                                 @endif
-                                                                <a href="/jobs/{{$job->id}}" class="btn btn-sm bg-red" role="button">Delete</a>
                                                             </div>
                                                             {!! Form::close() !!}
                                                         </td>
