@@ -26,9 +26,10 @@ class TabletController extends Controller
     public function index()
     {
         $jobs = ControlPanel::JobsGetYear();
+        $invoices = ControlPanel::InvoiceGetYear();
         $clients = Client::all()->where('Status', '1')->pluck('Name', 'id');
         $products = Product::all()->pluck('Name', 'id')->reverse();
 
-        return view('tablet/index')->with('jobs', $jobs)->with('clients', $clients)->with('products', $products);
+        return view('tablet/index')->with('jobs', $jobs)->with('invoices', $invoices)->with('clients', $clients)->with('products', $products);
     }
 }

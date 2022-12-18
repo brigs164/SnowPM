@@ -71,8 +71,6 @@ class JobsController extends Controller
         $job_detail = new Job_Details;
         $job_detail->jobid = Job::latest()->first()->id;
         $job_detail->productid = $request->input('prodid');
-        $job_detail->price = Client::where('id', $customerID)->value('Rate');
-        $job_detail->quantity = 1;
 
         $job_detail->save();
 
@@ -124,17 +122,15 @@ class JobsController extends Controller
             return redirect()->back()->with('success', 'Job Completed');
         }
         else if ($job->Status == 1){
-            $job->Status = '2';
-            $job->save();
-            return redirect()->back()->with('success', 'Job Invoiced');
-        }
-        else if ($job->Status == 2){
-            $job->Status = '3';
-            $job->save();
-            return redirect()->back()->with('success', 'Job Paid');
-        }
 
-        
+            $custid = $job->CustID;
+
+            $jobs = Job::where('custid', $custid)->where('Status', 1)->get();
+
+            $client = Client::find($custid);
+
+            return view('invoice/create')->with('jobs', $jobs)->with('client', $client);
+        }
         
     }
 

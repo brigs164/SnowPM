@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Invoice extends Model
 {
     use HasFactory;
 
-    public function job_detail()
+    //Has Many Details
+    public function invoice_details()
     {
-        return $this->belongsTo(Job_Details::class);
+        return $this->hasMany(InvoiceDetail::class, 'InvoiceID');
     }
 }

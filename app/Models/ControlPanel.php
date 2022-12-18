@@ -19,8 +19,8 @@ class ControlPanel extends Model
 
         }
 
-        $invoices1 = Invoice::whereYear('InvoiceDate', '=', $year2)->whereMonth('InvoiceDate', '<=', 6)->get();
-        $invoices2 = Invoice::whereYear('InvoiceDate', '=', $year1)->whereMonth('InvoiceDate', '>=', 7)->get();
+        $invoices1 = Invoice::whereYear('Date', '=', $year2)->whereMonth('Date', '<=', 6)->get();
+        $invoices2 = Invoice::whereYear('Date', '=', $year1)->whereMonth('Date', '>=', 7)->get();
         
         $invoices = $invoices1->merge($invoices2);
 

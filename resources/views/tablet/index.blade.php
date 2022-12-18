@@ -58,7 +58,7 @@
                                 @elseif ($i == 1)
                                     Completed Jobs
                                 @elseif ($i == 2)
-                                    Invoiced
+                                    Invoices
                                 @else
                                     Paid
                                 @endif
@@ -108,12 +108,6 @@
                                                                 else if($job->Status == "1"){
                                                                     echo "<span class='badge btn-block badge-warning'><big>Completed</big></span>";
                                                                 }
-                                                                else if($job->Status == "2"){
-                                                                    echo "<span class='badge btn-block badge-info'><big>Invoiced</big></span>";
-                                                                }
-                                                                else if($job->Status == "3"){
-                                                                    echo "<span class='badge btn-block badge-success'><big>Paid</big></span>";
-                                                                }
                                                             ?>
                                                         </td>
                                                         <td class="col-1">
@@ -121,17 +115,56 @@
                                                             <div class="btn-group">
                                                                 <a href="/jobs/{{$job->id}}" class="btn btn-sm bg-blue" role="button">View</a>
                                                                 @if($job->Status == "0")
-                                                                    {{Form::hidden('jobid', $job->id) }}
-                                                                    {{Form::hidden('_method', 'PUT') }}
+                                                                    {{Form::hidden('jobid', $job->id)}}
+                                                                    {{Form::hidden('_method', 'PUT')}}
                                                                     {{Form::submit('Complete', ['class' => 'btn btn-sm bg-green'])}}
                                                                     <a href="/jobs/{{$job->id}}" class="btn btn-sm bg-red" role="button">Delete</a>
                                                                 @elseif($job->Status == "1")
-                                                                    {{Form::hidden('jobid', $job->id) }}
-                                                                    {{Form::hidden('_method', 'PUT') }}
+                                                                    {{Form::hidden('jobid', $job->id)}}
+                                                                    {{Form::hidden('_method', 'PUT')}}
                                                                     {{Form::submit('Invoice', ['class' => 'btn btn-sm bg-green'])}}
-                                                                @elseif($job->Status == "2")
-                                                                    {{Form::hidden('jobid', $job->id) }}
-                                                                    {{Form::hidden('_method', 'PUT') }}
+                                                                @endif
+                                                            </div>
+                                                            {!! Form::close() !!}
+                                                        </td>
+                                                    </tr>
+                                                @endif
+                                            @endforeach
+                                        @endif
+
+                                        @if(count($invoices) > 0)
+                                            @foreach($invoices as $invoice)
+                                                @if ($invoice->Status == $i)
+                                                    <tr>
+                                                        <td class="col-1">
+                                                            {{$invoice->id}}
+                                                        </td>
+                                                        <td class="col-4">
+                                                            
+                                                        </td>
+                                                        <td class="col-2">
+                                                            {{\Carbon\Carbon::parse($invoice->Date)->format('m-d-y')}}
+                                                        </td>
+                                                        <td class="col-3">
+                                                            
+                                                        </td>
+                                                        <td class="col-1">
+                                                            <?php
+                                                                if($invoice->Status == "2"){
+                                                                    echo "<span class='badge btn-block badge-info'><big>Invoiced</big></span>";
+                                                                }
+                                                                else if($invoice->Status == "3"){
+                                                                    echo "<span class='badge btn-block badge-success'><big>Paid</big></span>";
+                                                                }
+                                                            ?>
+                                                        </td>
+                                                        <td class="col-1">
+                                                            {!! Form::open(['action' => ['App\Http\Controllers\JobsController@update', $invoice->id], 'method' => 'POST']) !!}   
+                                                            <div class="btn-group">
+                                                                <a href="/invoice/{{$invoice->id}}" class="btn btn-sm bg-blue" role="button">View</a>
+                                                                @if($invoice->Status == "2")
+                                                                    {{Form::hidden('invoiceid', $invoice->id)}} 
+                                                                    {{Form::hidden('_method', 'PUT')}}
                                                                     {{Form::submit('Paid', ['class' => 'btn btn-sm bg-green'])}}
                                                                 @endif
                                                             </div>
@@ -140,12 +173,6 @@
                                                     </tr>
                                                 @endif
                                             @endforeach
-                                        @else
-                                            <tr>
-                                                <td>
-                                                    No Invoices
-                                                </td>
-                                            </tr>
                                         @endif
                                     </tbody>
                                     <tfoot>

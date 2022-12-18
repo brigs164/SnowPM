@@ -17,6 +17,7 @@ Route::resource('clients', 'App\Http\Controllers\ClientsController');
 Route::resource('jobs', 'App\Http\Controllers\JobsController');
 Route::resource('controlpanel', 'App\Http\Controllers\ControlPanelController');
 Route::resource('products', 'App\Http\Controllers\ProductsController');
+Route::resource('invoice', 'App\Http\Controllers\InvoicesController');
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/tablet', [App\Http\Controllers\TabletController::class, 'index'])->name('tablet');

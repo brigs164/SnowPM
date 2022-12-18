@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateJobDetailsTable extends Migration
+class CreateInvoicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateJobDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('job_details', function (Blueprint $table) {
+        Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->integer('JobID');
-            $table->integer('ProductID');
+            $table->integer('CustID');
+            $table->integer('EmplID');
+            $table->integer('Status');
+            $table->date('Date');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateJobDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('job_details');
+        Schema::dropIfExists('invoices');
     }
 }

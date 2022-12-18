@@ -9,6 +9,13 @@ class Job extends Model
 {
     use HasFactory;
 
+
+    //Has One Status
+    public function job_detail()
+    {
+        return $this->hasOne(Job_Details::class, 'JobID');
+    }
+
     //Belongs to Client
     public function client()
     {

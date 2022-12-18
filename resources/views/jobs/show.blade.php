@@ -33,7 +33,7 @@
                 <!-- /.box-header -->
                 <div class="card-body">
                     <p>Customer: {{$job->client->Name}}</p>
-                    <p>Address: {{$job->client->Address}}, {{$job->client->City}}, {{$job->client->Zip}}</p>
+                    <p>Address: {{$job->client->Address}} {{$job->client->City}}, {{$job->client->State}} {{$job->client->Zip}}</p>
                     <p>Phone: {{$job->client->PhoneNumber}}</p>
                 </div>
             <!-- /.box-body -->
@@ -64,8 +64,6 @@
                     <p>Job Date: {{\Carbon\Carbon::parse($job->Date)->format('m-d-Y')}}</p>
                     <p>Job Status: {{$job->Status}}</p>
                     <p>Product ID: {{$job_detail->ProductID}}</p>
-                    <p>Price: {{$job_detail->Price}}</p>
-                    <p>Quantity: {{$job_detail->Quantity}}</p>
                     <p>Employee ID: {{$job->EmplID}}</p>
                 </div>
             <!-- /.box-body -->

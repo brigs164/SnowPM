@@ -43,7 +43,7 @@
                             </tr>
                             <tr>
                                 <td>Site Version</td>
-                                <td class="text-right">v1.00.08a</td>
+                                <td class="text-right">v1.00.09a</td>
                             </tr>
                             <tr>
                                 <td>phpMyAdmin</td>
