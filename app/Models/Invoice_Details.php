@@ -13,6 +13,11 @@ class Invoice_Details extends Model
 
     public function invoice()
     {
-        return $this->belongsTo(Invoice::class, 'InvoiceID');
+        return $this->belongsTo(Invoice::class);
+    }
+
+    public function job()
+    {
+        return $this->hasOne(Job::class, 'JobID');
     }
 }

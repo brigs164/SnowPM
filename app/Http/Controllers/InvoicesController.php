@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Invoice;
 use App\Models\Invoice_Details;
 use App\Models\Job;
+use App\Models\Client;
 
 class InvoicesController extends Controller
 {
@@ -26,7 +27,7 @@ class InvoicesController extends Controller
      */
     public function create()
     {
-        return view ('invoice.create');
+
     }
 
     /**
@@ -41,6 +42,7 @@ class InvoicesController extends Controller
         $invoice->CustID = $request->input("ClientID");
         $invoice->EmplID = 1;
         $invoice->Status = 2;
+        $invoice->Total = $request->input("Total");
         $invoice->Date = now();
 
         $invoice->save();
@@ -78,7 +80,11 @@ class InvoicesController extends Controller
      */
     public function show($id)
     {
-        //
+        $invoice = Invoice::find($id);
+
+        $invoice_details = Invoice_Details::select('JobID')->where('InvoiceID', $id)->get();
+
+        return view ('invoice.view')->with('invoice', $invoice);
     }
 
     /**
@@ -101,7 +107,16 @@ class InvoicesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        $id = $request->input('invoiceID');
+
+        $invoice = Invoice::find($id);
+
+        if ($invoice->Status == 2) {
+            $invoice->Status = '3';
+            $invoice->save();
+            return redirect()->back()->with('success', 'Job Completed');
+        }
     }
 
     /**

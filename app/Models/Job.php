@@ -9,7 +9,6 @@ class Job extends Model
 {
     use HasFactory;
 
-
     //Has One Status
     public function job_detail()
     {

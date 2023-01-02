@@ -12,6 +12,12 @@ class Invoice extends Model
     //Has Many Details
     public function invoice_details()
     {
-        return $this->hasMany(InvoiceDetail::class, 'InvoiceID');
+        return $this->hasMany(Invoice_Details::class, 'InvoiceID');
+    }
+
+    //Belongs to Client
+    public function client()
+    {
+        return $this->belongsTo(Client::class, 'CustID');
     }
 }

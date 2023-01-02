@@ -18,6 +18,7 @@ class CreateInvoicesTable extends Migration
             $table->integer('CustID');
             $table->integer('EmplID');
             $table->integer('Status');
+            $table->decimal('Total');
             $table->date('Date');
             $table->timestamps();
         });

@@ -76,13 +76,14 @@
     <!-- Main Footer -->
     <footer class="main-footer">
         <div class="float-right d-none d-sm-block">
-            <b>Version</b> 1.00.09a
+            <b>Version</b> 1.00.10a
         </div>
         <strong>&nbsp;</strong>
     </footer>
 </div>
 
 <script src="{{ mix('js/app.js') }}" defer></script>
+<script src="https://adminlte.io/themes/v3/plugins/jquery/jquery.min.js"></script>
 
 @yield('third_party_scripts')
 

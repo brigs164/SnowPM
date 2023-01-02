@@ -30,7 +30,7 @@
         <div class="col-12">
             <h4 style="border-bottom-style: solid; border-bottom-color: grey; padding-bottom: 9px;">
                 Elite Winter Services
-                <div class="float-right">Date: {{now()->format('m/d/Y')}}</div>
+                <div class="float-right">Date: </div>
             </h4>
         </div>
     </div>
@@ -49,16 +49,16 @@
         <div class="col-sm-4 invoice-col">
             To
             <address>
-                <strong>{{$client->Name}}</strong><br>
-                {{$client->Address}}<br>
-                {{$client->City}}, {{$client->State}} {{$client->Zip}}<br>
-                {{$client->PhoneNumber}}
+                <strong>{{$invoice->client->Name}}</strong><br>
+                {{$invoice->client->Address}}<br>
+                {{$invoice->client->City}}, {{$invoice->client->State}} {{$invoice->client->Zip}}<br>
+                {{$invoice->client->PhoneNumber}}
             </address>
         </div>
 
         <div class="col-sm-4 invoice-col">
             <b>Invoice #:</b> 000000<br>
-            <b>Account #:</b> {{$client->ClientID}}<br>
+            <b>Account #:</b> {{$invoice->client->ClientID}}<br>
             <b>Payment Due:</b> Upon Receipt
         </div>
     </div>
@@ -76,25 +76,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if(count($jobs) > 0)
-                        @foreach($jobs as $job)
-                            <tr>
-                                <td>{{$job->job_detail->product->Name}}</td>
-                                <td>{{$job->job_detail->product->Description}}</td>
-                                <td>${{$job->client->Rate}}</td>
-                                <td>1</td>
-                                <td>${{$job->client->Rate}}</td>
-                                @php ($total = $job->client->Rate + $total)
-                                @php ($jobIDs[] = $job->id)
-                            </tr>
-                        @endforeach
-                    @else
-                      <tr>
-                        <td>
-                          No Invoices
-                        </td>
-                      </tr>
-                    @endif
+                    {{$invoice->invoice_details}}
                 </tbody>
             </table>
         </div>
@@ -134,17 +116,11 @@
             </div>
         </div>
     </div>
-    @php ($jobID = implode(", ", $jobIDs))
-    {{$jobID}}
+
 
     <div class="row no-print">
         <div class="col-12">
-            {!! Form::open(['action' => 'App\Http\Controllers\InvoicesController@store', 'method' => 'POST']) !!}
-            <a href="" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
-            {{Form::hidden('ClientID', $client->id)}}
-            {{Form::hidden('jobID', $jobID)}}
-            {{Form::hidden('Total', $total)}}
-            {{Form::submit('Invoice', ['class' => 'btn btn-primary float-right'])}}
+
         </div>
     </div>
 </div>

@@ -113,16 +113,16 @@
                                                         <td class="col-1">
                                                             {!! Form::open(['action' => ['App\Http\Controllers\JobsController@update', $job->id], 'method' => 'POST']) !!}   
                                                             <div class="btn-group">
-                                                                <a href="/jobs/{{$job->id}}" class="btn btn-sm bg-blue" role="button">View</a>
+                                                                <a href="/jobs/{{$job->id}}" class="btn btn-sm bg-teal" role="button">View</a>
+                                                                <a href="/jobs/{{$job->id}}" class="btn btn-sm bg-gray" role="button">Edit</a>
                                                                 @if($job->Status == "0")
                                                                     {{Form::hidden('jobid', $job->id)}}
                                                                     {{Form::hidden('_method', 'PUT')}}
-                                                                    {{Form::submit('Complete', ['class' => 'btn btn-sm bg-green'])}}
-                                                                    <a href="/jobs/{{$job->id}}" class="btn btn-sm bg-red" role="button">Delete</a>
+                                                                    {{Form::submit('Complete', ['class' => 'btn btn-sm bg-primary'])}}
                                                                 @elseif($job->Status == "1")
                                                                     {{Form::hidden('jobid', $job->id)}}
                                                                     {{Form::hidden('_method', 'PUT')}}
-                                                                    {{Form::submit('Invoice', ['class' => 'btn btn-sm bg-green'])}}
+                                                                    {{Form::submit('Invoice', ['class' => 'btn btn-sm bg-primary'])}}
                                                                 @endif
                                                             </div>
                                                             {!! Form::close() !!}
@@ -154,18 +154,19 @@
                                                                     echo "<span class='badge btn-block badge-info'><big>Invoiced</big></span>";
                                                                 }
                                                                 else if($invoice->Status == "3"){
-                                                                    echo "<span class='badge btn-block badge-success'><big>Paid</big></span>";
+                                                                    echo "<span class='badge btn-block bg-green'><big>Paid</big></span>";
                                                                 }
                                                             ?>
                                                         </td>
                                                         <td class="col-1">
-                                                            {!! Form::open(['action' => ['App\Http\Controllers\JobsController@update', $invoice->id], 'method' => 'POST']) !!}   
+                                                            {!! Form::open(['action' => ['App\Http\Controllers\InvoicesController@update', $invoice->id], 'method' => 'POST']) !!}   
                                                             <div class="btn-group">
-                                                                <a href="/invoice/{{$invoice->id}}" class="btn btn-sm bg-blue" role="button">View</a>
+                                                                <a href="/invoice/{{$invoice->id}}" class="btn btn-sm bg-teal" role="button">View</a>
+                                                                <a href="/invoice/{{$invoice->id}}" class="btn btn-sm bg-gray" role="button">Edit</a>
                                                                 @if($invoice->Status == "2")
-                                                                    {{Form::hidden('invoiceid', $invoice->id)}} 
+                                                                    {{Form::hidden('invoiceID', $invoice->id)}} 
                                                                     {{Form::hidden('_method', 'PUT')}}
-                                                                    {{Form::submit('Paid', ['class' => 'btn btn-sm bg-green'])}}
+                                                                    {{Form::submit('Invoice', ['class' => 'btn btn-sm bg-primary'])}}
                                                                 @endif
                                                             </div>
                                                             {!! Form::close() !!}
