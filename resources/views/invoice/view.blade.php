@@ -76,7 +76,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{$invoice->invoice_details}}
+                    @foreach($invoice->invoice_details as $details)
+                        <tr>
+                            <td>{{$details->job->job_detail->product->Name}}</td>
+                            <td>{{$details->job->job_detail->product->Date}}</td>
+                            <td>${{$details->job->client->Rate}}</td>
+                            <td>1</td>
+                            <td>${{$details->job->client->Rate}}</td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -96,7 +104,7 @@
                     <tbody>
                         <tr>
                             <th style="width:50%">Subtotal:</th>
-                            <td>${{$total}}.00</td>
+                            <td>${{$invoice->Total}}</td>
                         </tr>
                         <tr>
                             <th style="width:50%">Tax:</th>
@@ -109,7 +117,7 @@
                         </tr>
                         <tr>
                             <th>Total:</th>
-                            <td>${{$total}}.00</td>
+                            <td>${{$invoice->Total}}</td>
                         </tr>
                     </tbody>
                 </table>

@@ -44,4 +44,22 @@ class ControlPanel extends Model
 
         return $jobs;
     }
+
+    public static function ProductsGetYear(){
+
+        $years = ControlPanel::all();
+        
+        foreach($years as $year){
+            $year2 = $year->Year2;
+            $year1 = $year->Year1;
+
+        }
+
+        $product1 = Product::whereYear('Date', '=', $year2)->whereMonth('Date', '<=', 6)->get();
+        $product2 = Product::whereYear('Date', '=', $year1)->whereMonth('Date', '>=', 7)->get();
+        
+        $products = $product1->merge($product2);
+
+        return $products;
+    }
 }

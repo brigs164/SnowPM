@@ -27,13 +27,33 @@ class HomeController extends Controller
         $jobs = ControlPanel::JobsGetYear();
         $invoices = ControlPanel::InvoiceGetYear();
         $total = 0;
+        $invoicePendingTotals = [];
         $invoiceTotals = [];
-
+        
         for ($i=1; $i <= 12; $i++) { 
             foreach($invoices as $invoice){  
                 if ($i == date("m", strtotime($invoice->Date))) {
-                    $total = $invoice->Total + $total;
-                    $invoiceTotals[$i] = $total;
+                    if ($invoice->Status == "2") {
+                        $total = $invoice->Total + $total;
+                        $invoicePendingTotals[$i] = $total;
+                    }
+                }
+            }
+
+            if ($total == 0) {
+                $invoicePendingTotals[$i] = 0;
+            }
+
+            $total = 0;
+        }
+        
+        for ($i=1; $i <= 12; $i++) { 
+            foreach($invoices as $invoice){  
+                if ($i == date("m", strtotime($invoice->Date))) {
+                    if ($invoice->Status == "3") {
+                        $total = $invoice->Total + $total;
+                        $invoiceTotals[$i] = $total;
+                    }
                 }
             }
 
@@ -43,7 +63,6 @@ class HomeController extends Controller
 
             $total = 0;
         }
-        
-        return view('home')->with('invoices', $invoices)->with('jobs', $jobs)->with('invoiceTotals', $invoiceTotals);
+        return view('home')->with('invoices', $invoices)->with('jobs', $jobs)->with('invoiceTotals', $invoiceTotals)->with('invoicePendingTotals', $invoicePendingTotals);
     }
 }

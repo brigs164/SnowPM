@@ -34,6 +34,7 @@ $jobCount = $completedCount + $openCount;
 
 $totalJobs = count($jobs);
 
+$invoicePendingTotals = array_values($invoicePendingTotals);
 $invoiceFinalTotals = array_values($invoiceTotals);
 
 @endphp
@@ -91,7 +92,7 @@ $invoiceFinalTotals = array_values($invoiceTotals);
                     <div class="info-box-content">
                         <span class="info-box-text">Income</span>
                         <span class="info-box-number">
-                            $
+                            $@php echo array_sum($invoiceFinalTotals) @endphp
                         </span>
                     </div>
                 </div>
@@ -102,7 +103,7 @@ $invoiceFinalTotals = array_values($invoiceTotals);
                     <div class="info-box-content">
                         <span class="info-box-text">Pending</span>
                         <span class="info-box-number">
-                            $@php echo array_sum($invoiceFinalTotals) @endphp
+                            $@php echo array_sum($invoicePendingTotals) @endphp
                         </span>
                     </div>
                 </div>
@@ -194,7 +195,7 @@ $invoiceFinalTotals = array_values($invoiceTotals);
                     <div class="col-sm-3 col-6">
                         <div class="description-block border-right">
                             <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> %</span>
-                            <h5 class="description-header">$</h5>
+                            <h5 class="description-header text-success">$@php echo array_sum($invoiceFinalTotals) @endphp</h5>
                             <span class="description-text">TOTAL REVENUE</span>
                         </div>
                     </div>

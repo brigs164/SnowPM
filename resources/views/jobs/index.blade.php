@@ -93,51 +93,96 @@
                     </tr>
                   </thead>
                   <tbody>
-                    @if(count($jobs) > 0)
-                      @foreach($jobs as $job)
-                        @if ($job->Status == $i)
-                          <tr>
-                            <td>
-                              {{$job->id}}
-                            </td>
-                            <td>
-                              {{$job->JobDescription}}
-                            </td>
-                            <td>
-                              {{\Carbon\Carbon::parse($job->Date)->format('m-d-y')}}
-                            </td>
-                            <td>
-                              {{$job->client->Name}}
-                            </td>
-                            <td>
-                              <?php
-                                  if($job->Status == "0"){
-                                      echo "<span class='badge btn-block bg-danger'><big>Open</big></span>";
-                                  }
-                                  else if($job->Status == "1"){
-                                      echo "<span class='badge btn-block badge-warning'><big>Completed</big></span>";
-                                  }
-                                  else if($job->Status == "2"){
-                                      echo "<span class='badge btn-block badge-info'><big>Invoiced</big></span>";
-                                  }
-                                  else if($job->Status == "3"){
-                                      echo "<span class='badge btn-block badge-success'><big>Paid</big></span>";
-                                  }
-                              ?>
-                            </td>
-                            <td>
-                            <a href="/jobs/{{$job->id}}" class="badge btn-block bg-blue"><big>View</big></a>
-                            </td>
-                          </tr>
-                        @endif
-                      @endforeach
-                    @else
-                      <tr>
-                        <td>
-                          No Invoices
-                        </td>
-                      </tr>
-                    @endif
+                  @if(count($jobs) > 0)
+                                            @foreach($jobs as $job)
+                                                @if ($job->Status == $i)
+                                                    <tr>
+                                                        <td class="col-1">
+                                                            {{$job->id}}
+                                                        </td>
+                                                        <td class="col-4">
+                                                            {{$job->JobDescription}}
+                                                        </td>
+                                                        <td class="col-2">
+                                                            {{\Carbon\Carbon::parse($job->Date)->format('m-d-y')}}
+                                                        </td>
+                                                        <td class="col-3">
+                                                            {{$job->client->Name}}
+                                                        </td>
+                                                        <td class="col-1">
+                                                            <?php
+                                                                if($job->Status == "0"){
+                                                                    echo "<span class='badge btn-block bg-danger'><big>Open</big></span>";
+                                                                }
+                                                                else if($job->Status == "1"){
+                                                                    echo "<span class='badge btn-block badge-warning'><big>Completed</big></span>";
+                                                                }
+                                                            ?>
+                                                        </td>
+                                                        <td class="col-1">
+                                                            {!! Form::open(['action' => ['App\Http\Controllers\JobsController@update', $job->id], 'method' => 'POST']) !!}   
+                                                            <div class="btn-group">
+                                                                <a href="/jobs/{{$job->id}}" class="btn btn-sm bg-teal" role="button">View</a>
+                                                                <a href="/jobs/{{$job->id}}" class="btn btn-sm bg-gray" role="button">Edit</a>
+                                                                @if($job->Status == "0")
+                                                                    {{Form::hidden('jobid', $job->id)}}
+                                                                    {{Form::hidden('_method', 'PUT')}}
+                                                                    {{Form::submit('Complete', ['class' => 'btn btn-sm bg-primary'])}}
+                                                                @elseif($job->Status == "1")
+                                                                    {{Form::hidden('jobid', $job->id)}}
+                                                                    {{Form::hidden('_method', 'PUT')}}
+                                                                    {{Form::submit('Invoice', ['class' => 'btn btn-sm bg-primary'])}}
+                                                                @endif
+                                                            </div>
+                                                            {!! Form::close() !!}
+                                                        </td>
+                                                    </tr>
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                        @if(count($invoices) > 0)
+                                            @foreach($invoices as $invoice)
+                                                @if ($invoice->Status == $i)
+                                                    <tr>
+                                                        <td class="col-1">
+                                                            {{$invoice->id}}
+                                                        </td>
+                                                        <td class="col-4">
+                                                            
+                                                        </td>
+                                                        <td class="col-2">
+                                                            {{\Carbon\Carbon::parse($invoice->Date)->format('m-d-y')}}
+                                                        </td>
+                                                        <td class="col-3">
+                                                            {{$invoice->client->Name}}
+                                                        </td>
+                                                        <td class="col-1">
+                                                            <?php
+                                                                if($invoice->Status == "2"){
+                                                                    echo "<span class='badge btn-block badge-info'><big>Invoiced</big></span>";
+                                                                }
+                                                                else if($invoice->Status == "3"){
+                                                                    echo "<span class='badge btn-block bg-green'><big>Paid</big></span>";
+                                                                }
+                                                            ?>
+                                                        </td>
+                                                        <td class="col-1">
+                                                            {!! Form::open(['action' => ['App\Http\Controllers\InvoicesController@update', $invoice->id], 'method' => 'POST']) !!}   
+                                                            <div class="btn-group">
+                                                                <a href="/invoice/{{$invoice->id}}" class="btn btn-sm bg-teal" role="button">View</a>
+                                                                <a href="/invoice/{{$invoice->id}}" class="btn btn-sm bg-gray" role="button">Edit</a>
+                                                                @if($invoice->Status == "2")
+                                                                    {{Form::hidden('invoiceID', $invoice->id)}} 
+                                                                    {{Form::hidden('_method', 'PUT')}}
+                                                                    {{Form::submit('Paid', ['class' => 'btn btn-sm bg-primary'])}}
+                                                                @endif
+                                                            </div>
+                                                            {!! Form::close() !!}
+                                                        </td>
+                                                    </tr>
+                                                @endif
+                                            @endforeach
+                                        @endif
                   </tbody>
                   <tfoot>
                   </tfoot>

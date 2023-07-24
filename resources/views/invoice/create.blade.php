@@ -80,7 +80,7 @@
                         @foreach($jobs as $job)
                             <tr>
                                 <td>{{$job->job_detail->product->Name}}</td>
-                                <td>{{$job->job_detail->product->Description}}</td>
+                                <td>{{$job->job_detail->product->Date}}</td>
                                 <td>${{$job->client->Rate}}</td>
                                 <td>1</td>
                                 <td>${{$job->client->Rate}}</td>

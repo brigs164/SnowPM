@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\ControlPanel;
 
 class ProductsController extends Controller
 {
@@ -14,7 +15,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Product::all()->reverse();
+        $products = ControlPanel::ProductsGetYear();
         return view('products.index')->with('products', $products);
     }
 
@@ -42,7 +43,7 @@ class ProductsController extends Controller
 
         $product = new Product;
         $product->name = $request->input('name');
-        $product->description = $request->input('description');
+        $product->date = date('Y-m-d');
         $product->save();
 
         return redirect()->back()->with('success', 'Product Created');

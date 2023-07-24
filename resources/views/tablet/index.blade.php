@@ -92,7 +92,7 @@
                                                             {{$job->id}}
                                                         </td>
                                                         <td class="col-4">
-                                                            {{$job->JobDescription}}
+                                                            
                                                         </td>
                                                         <td class="col-2">
                                                             {{\Carbon\Carbon::parse($job->Date)->format('m-d-y')}}
@@ -146,7 +146,7 @@
                                                             {{\Carbon\Carbon::parse($invoice->Date)->format('m-d-y')}}
                                                         </td>
                                                         <td class="col-3">
-                                                            
+                                                            {{$invoice->client->Name}}
                                                         </td>
                                                         <td class="col-1">
                                                             <?php
@@ -166,7 +166,7 @@
                                                                 @if($invoice->Status == "2")
                                                                     {{Form::hidden('invoiceID', $invoice->id)}} 
                                                                     {{Form::hidden('_method', 'PUT')}}
-                                                                    {{Form::submit('Invoice', ['class' => 'btn btn-sm bg-primary'])}}
+                                                                    {{Form::submit('Paid', ['class' => 'btn btn-sm bg-primary'])}}
                                                                 @endif
                                                             </div>
                                                             {!! Form::close() !!}
@@ -232,10 +232,6 @@
                     <div class="row">
                         {{Form::label('name', 'Name:', ['class' => 'form-control bg-secondary col-sm-3'])}}
                         {{Form::text('name', '', ['class' => 'form-control col-sm-9'])}}
-                    </div>
-                    <div class="row">
-                        {{Form::label('description', 'Description:', ['class' => 'form-control bg-secondary col-sm-3'])}}
-                        {{Form::text('description', '', ['class' => 'form-control col-sm-9'])}}
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">

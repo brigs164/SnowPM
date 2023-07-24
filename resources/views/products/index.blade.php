@@ -53,7 +53,7 @@
                             {{$product->Name}}
                           </td>
                           <td>
-                            {{$product->Description}}
+                            {{$product->Date}}
                           </td>
                         </tr>
                       @endforeach
@@ -98,7 +98,6 @@
                   </thead>
                   <tr>
                     <td>{{Form::text('name', '', ['class' => 'form-control'])}}</td>
-                    <td>{{Form::text('description', '', ['class' => 'form-control'])}}</td>
                     <td>{{Form::submit('Submit', ['class' => 'btn btn-block btn-primary'])}}</td>
                   </tr>
                 </tbody>
