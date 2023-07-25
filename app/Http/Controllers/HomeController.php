@@ -26,43 +26,60 @@ class HomeController extends Controller
     {
         $jobs = ControlPanel::JobsGetYear();
         $invoices = ControlPanel::InvoiceGetYear();
-        $total = 0;
+        $expenses = ControlPanel::ExpensesGetYear();
+        $etotal = 0;
+        $ptotal = 0;
+        $itotal = 0;
+        $expenseTotals = [];
         $invoicePendingTotals = [];
         $invoiceTotals = [];
         
         for ($i=1; $i <= 12; $i++) { 
+
+            //Pending Invoices
             foreach($invoices as $invoice){  
                 if ($i == date("m", strtotime($invoice->Date))) {
                     if ($invoice->Status == "2") {
-                        $total = $invoice->Total + $total;
-                        $invoicePendingTotals[$i] = $total;
+                        $ptotal = $invoice->Total + $ptotal;
+                        $invoicePendingTotals[$i] = $ptotal;
                     }
                 }
             }
 
-            if ($total == 0) {
+            if ($ptotal == 0) {
                 $invoicePendingTotals[$i] = 0;
             }
+            $ptotal = 0;
 
-            $total = 0;
-        }
-        
-        for ($i=1; $i <= 12; $i++) { 
+            //Expenses
+            foreach($expenses as $expense){  
+                if ($i == date("m", strtotime($expense->Date))) {
+                    $etotal = $expense->Amount + $etotal;
+                    $expenseTotals[$i] = $etotal;
+                }
+            }
+
+            if ($etotal == 0) {
+                $expenseTotals[$i] = 0;
+            }
+            $etotal = 0;
+
+            //Paid Invoices
             foreach($invoices as $invoice){  
                 if ($i == date("m", strtotime($invoice->Date))) {
                     if ($invoice->Status == "3") {
-                        $total = $invoice->Total + $total;
-                        $invoiceTotals[$i] = $total;
+                        $itotal = $invoice->Total + $itotal;
+                        $invoiceTotals[$i] = $itotal;
                     }
                 }
             }
 
-            if ($total == 0) {
+            if ($itotal == 0) {
                 $invoiceTotals[$i] = 0;
             }
-
-            $total = 0;
+            $itotal = 0;
         }
-        return view('home')->with('invoices', $invoices)->with('jobs', $jobs)->with('invoiceTotals', $invoiceTotals)->with('invoicePendingTotals', $invoicePendingTotals);
+        
+        return view('home')->with('invoices', $invoices)->with('jobs', $jobs)->with('invoiceTotals', $invoiceTotals)->with('invoicePendingTotals', $invoicePendingTotals)->with('expenseTotals', $expenseTotals);
     }
 }

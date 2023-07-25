@@ -6,6 +6,7 @@ $openCount = 0;
 $completedCount = 0;
 $jobCount = 0;
 $toatlJobs = 0;
+$expenses = 0;
 
 
 foreach($invoices as $invoice){
@@ -28,12 +29,11 @@ foreach($jobs as $job){
     }
 }
 
-$invoiceTotalCount = $invoiceCount + $paidCount;
-
 $jobCount = $completedCount + $openCount;
 
 $totalJobs = count($jobs);
 
+$expenseTotals = array_values($expenseTotals);
 $invoicePendingTotals = array_values($invoicePendingTotals);
 $invoiceFinalTotals = array_values($invoiceTotals);
 
@@ -69,7 +69,7 @@ $invoiceFinalTotals = array_values($invoiceTotals);
                 <div class="info-box-content">
                     <span class="info-box-text">Profit</span>
                     <span class="info-box-number">
-                        $
+                    $@php echo array_sum($invoiceFinalTotals)-array_sum($expenseTotals) @endphp
                     </span>
                 </div>
             </div>
@@ -80,7 +80,7 @@ $invoiceFinalTotals = array_values($invoiceTotals);
                 <div class="info-box-content">
                     <span class="info-box-text">Expenses</span>
                     <span class="info-box-number">
-                        $
+                        $@php echo array_sum($expenseTotals) @endphp
                     </span>
                 </div>
             </div>
@@ -202,21 +202,21 @@ $invoiceFinalTotals = array_values($invoiceTotals);
                     <div class="col-sm-3 col-6">
                         <div class="description-block border-right">
                             <span class="description-percentage text-danger"><i class="fas fa-caret-down"></i> %</span>
-                            <h5 class="description-header">$</h5>
+                            <h5 class="description-header text-danger">$@php echo array_sum($expenseTotals) @endphp</h5>
                             <span class="description-text">TOTAL EXPENSES</span>
-                        </div>
+                        </div> 
                     </div>
                     <div class="col-sm-3 col-6">
                         <div class="description-block border-right">
                             <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> %</span>
-                            <h5 class="description-header">$</h5>
+                            <h5 class="description-header">$@php echo array_sum($invoiceFinalTotals)-array_sum($expenseTotals) @endphp</h5>
                             <span class="description-text">TOTAL PROFIT</span>
                         </div>
                     </div>
                     <div class="col-sm-3 col-6">
                         <div class="description-block">
                             <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> %</span>
-                            <h5 class="description-header">$</h5>
+                            <h5 class="description-header">$0 / $1000</h5>
                             <span class="description-text">GOAL PROFIT</span>
                         </div>
                     </div>

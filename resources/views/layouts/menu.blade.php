@@ -23,6 +23,12 @@
     </a>
 </li>
 <li class="nav-item">
+    <a href="{{ route('expense.index') }}" class="{{ (Route::is('expense.index')) ? 'nav-link active' : 'nav-link'}}">
+        <i class="nav-icon fa fa-wallet"></i>
+        <p>Expenses</p>
+    </a>
+</li>
+<li class="nav-item">
     <a href="{{ route('tablet') }}" class="{{ (Route::is('tablet')) ? 'nav-link active' : 'nav-link'}}">
         <i class="nav-icon fa fa-tablet"></i>
         <p>Tablet-Mode</p>

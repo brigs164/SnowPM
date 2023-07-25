@@ -252,15 +252,26 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
+                {!! Form::open(['action' => 'App\Http\Controllers\ExpensesController@store', 'method' => 'POST']) !!}
                 <div class="modal-body bg-secondary">
-                    <p>Date</p>
-                    <p>Description</p>
-                    <p>Amount</p>
+                    <div class="row">
+                        {{Form::label('date', 'Date:', ['class' => 'form-control bg-secondary col-sm-3'])}}
+                        {{Form::text('date', 'date("Y-m-d")', ['class' => 'form-control col-sm-9', 'readonly' => 'true'])}}
+                    </div>
+                    <div class="row">
+                        {{Form::label('description', 'Description:', ['class' => 'form-control bg-secondary col-sm-3'])}}
+                        {{Form::text('description', '', ['class' => 'form-control col-sm-9'])}}
+                    </div>
+                    <div class="row">
+                        {{Form::label('amount', 'Amount:', ['class' => 'form-control bg-secondary col-sm-3'])}}
+                        {{Form::text('amount', '', ['class' => 'form-control col-sm-9'])}}
+                    </div>
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-outline-light">Save changes</button>
+                    {{Form::submit('Submit', ['class' => 'btn btn-outline-light'])}}
                 </div>
+                {!! Form::close() !!}
             </div>
         </div>
     </div>

@@ -100,7 +100,7 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <?php
-                                                        $address = $client->Address . " " . $client->city . " " . $client->state . " " . $client->zip;
+                                                        $address = $client->Address . " " . $client->City . " " . $client->State . " " . $client->Zip;
                                                         $address = str_replace(" ", "+", $address);
                                                 ?>
                                                 <iframe width="100%" height="600" src="https://maps.google.com/maps?q=<?php echo $address; ?>&output=embed"></iframe>

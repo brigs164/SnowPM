@@ -62,4 +62,22 @@ class ControlPanel extends Model
 
         return $products;
     }
+
+    public static function ExpensesGetYear(){
+
+        $years = ControlPanel::all();
+        
+        foreach($years as $year){
+            $year2 = $year->Year2;
+            $year1 = $year->Year1;
+
+        }
+
+        $expense1 = Expense::whereYear('Date', '=', $year2)->whereMonth('Date', '<=', 6)->get();
+        $expense2 = Expense::whereYear('Date', '=', $year1)->whereMonth('Date', '>=', 7)->get();
+        
+        $expenses = $expense1->merge($expense2);
+
+        return $expenses;
+    }
 }
