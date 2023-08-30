@@ -76,7 +76,7 @@
     <!-- Main Footer -->
     <footer class="main-footer">
         <div class="float-right d-none d-sm-block">
-            <b>Version</b> 1.00.12a
+            <b>Version</b> 1.00.13a
         </div>
         <strong>&nbsp;</strong>
     </footer>

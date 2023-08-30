@@ -256,7 +256,7 @@
                 <div class="modal-body bg-secondary">
                     <div class="row">
                         {{Form::label('date', 'Date:', ['class' => 'form-control bg-secondary col-sm-3'])}}
-                        {{Form::text('date', 'date("Y-m-d")', ['class' => 'form-control col-sm-9', 'readonly' => 'true'])}}
+                        {{Form::text('date', '' . (date("Y-m-d")), ['class' => 'form-control col-sm-9', 'readonly' => 'true'])}}
                     </div>
                     <div class="row">
                         {{Form::label('description', 'Description:', ['class' => 'form-control bg-secondary col-sm-3'])}}

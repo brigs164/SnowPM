@@ -20,4 +20,9 @@ class Invoice extends Model
     {
         return $this->belongsTo(Client::class, 'CustID');
     }
+
+    //Other Functions
+    public function getInvoiceIDAttribute() {
+        return str_pad($this->id, 5, '0', STR_PAD_LEFT);
+    }
 }

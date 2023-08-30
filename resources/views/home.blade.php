@@ -208,15 +208,35 @@ $invoiceFinalTotals = array_values($invoiceTotals);
                     </div>
                     <div class="col-sm-3 col-6">
                         <div class="description-block border-right">
-                            <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> %</span>
-                            <h5 class="description-header">$@php echo array_sum($invoiceFinalTotals)-array_sum($expenseTotals) @endphp</h5>
+                            @php 
+                                if (array_sum($invoiceFinalTotals)-array_sum($expenseTotals) < 0){
+                                    echo '<span class="description-percentage text-danger">';
+                                    echo '<i class="fas fa-caret-down"></i> %</span>';
+                                    echo '<h5 class="description-header text-danger">$' . (array_sum($invoiceFinalTotals)-array_sum($expenseTotals)) . '</h5>';
+                                }
+                                else {
+                                    echo '<span class="description-percentage text-success">';
+                                    echo '<i class="fas fa-caret-up"></i> %</span>';
+                                    echo '<h5 class="description-header text-success">$' . (array_sum($invoiceFinalTotals)-array_sum($expenseTotals)) . '</h5>';
+                                }
+                            @endphp
                             <span class="description-text">TOTAL PROFIT</span>
                         </div>
                     </div>
                     <div class="col-sm-3 col-6">
                         <div class="description-block">
-                            <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> %</span>
-                            <h5 class="description-header">$0 / $1000</h5>
+                        @php 
+                                if (array_sum($invoiceFinalTotals)-array_sum($expenseTotals) < 0){
+                                    echo '<span class="description-percentage text-danger">';
+                                    echo '<i class="fas fa-caret-down"></i> %</span>';
+                                    echo '<h5 class="description-header text-danger">$' . (array_sum($invoiceFinalTotals)-array_sum($expenseTotals)) . '/ $1000</h5>';
+                                }
+                                else {
+                                    echo '<span class="description-percentage text-success">';
+                                    echo '<i class="fas fa-caret-up"></i> %</span>';
+                                    echo '<h5 class="description-header text-success">$' . (array_sum($invoiceFinalTotals)-array_sum($expenseTotals)) . '/ $1000</h5>';
+                                }
+                            @endphp
                             <span class="description-text">GOAL PROFIT</span>
                         </div>
                     </div>

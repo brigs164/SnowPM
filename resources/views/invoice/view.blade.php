@@ -30,7 +30,7 @@
         <div class="col-12">
             <h4 style="border-bottom-style: solid; border-bottom-color: grey; padding-bottom: 9px;">
                 Elite Winter Services
-                <div class="float-right">Date: </div>
+                <div class="float-right">Date: {{$invoice->Date}}</div>
             </h4>
         </div>
     </div>
@@ -57,7 +57,7 @@
         </div>
 
         <div class="col-sm-4 invoice-col">
-            <b>Invoice #:</b> 000000<br>
+            <b>Invoice #:</b> {{$invoice->InvoiceID}}<br>
             <b>Account #:</b> {{$invoice->client->ClientID}}<br>
             <b>Payment Due:</b> Upon Receipt
         </div>
