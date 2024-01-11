@@ -80,4 +80,22 @@ class ControlPanel extends Model
 
         return $expenses;
     }
+
+    public static function PaymentsGetYear(){
+
+        $years = ControlPanel::all();
+        
+        foreach($years as $year){
+            $year2 = $year->Year2;
+            $year1 = $year->Year1;
+
+        }
+
+        $payments1 = Payment::whereYear('Date', '=', $year2)->whereMonth('Date', '<=', 6)->get();
+        $payments2 = Payment::whereYear('Date', '=', $year1)->whereMonth('Date', '>=', 7)->get();
+        
+        $payments = $payments1->merge($payments2);
+
+        return $payments;
+    }
 }

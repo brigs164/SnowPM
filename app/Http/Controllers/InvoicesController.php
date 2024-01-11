@@ -69,7 +69,7 @@ class InvoicesController extends Controller
             }
         }
 
-        return redirect()->back()->with('success', 'Invoice Created');
+        return redirect()->route('tablet')->with('success', 'Invoice Created');
     }
 
     /**
@@ -115,7 +115,7 @@ class InvoicesController extends Controller
         if ($invoice->Status == 2) {
             $invoice->Status = '3';
             $invoice->save();
-            return redirect()->back()->with('success', 'Job Completed');
+            return redirect()->back()->with('success', 'Invoice Paid');
         }
     }
 

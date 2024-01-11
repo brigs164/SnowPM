@@ -19,6 +19,11 @@ class Client extends Model
         return $this->hasMany(Invoice::class);
     }
 
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
     //Other Functions
     public function getClientIDAttribute() {
         return str_pad($this->id, 5, '0', STR_PAD_LEFT);

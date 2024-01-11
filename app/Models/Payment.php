@@ -7,5 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Payment extends Model
 {
+    //Belongs to Client
+    public function client()
+    {
+        return $this->belongsTo(Client::class, 'CustID');
+    }
+    
     use HasFactory;
 }

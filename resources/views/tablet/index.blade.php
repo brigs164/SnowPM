@@ -163,11 +163,11 @@
                                                             <div class="btn-group">
                                                                 <a href="/invoice/{{$invoice->id}}" class="btn btn-sm bg-teal" role="button">View</a>
                                                                 <a href="/invoice/{{$invoice->id}}" class="btn btn-sm bg-gray" role="button">Edit</a>
-                                                                @if($invoice->Status == "2")
+                                                                <!-- @if($invoice->Status == "2")
                                                                     {{Form::hidden('invoiceID', $invoice->id)}} 
                                                                     {{Form::hidden('_method', 'PUT')}}
-                                                                    {{Form::submit('Paid', ['class' => 'btn btn-sm bg-primary'])}}
-                                                                @endif
+                                                                    {{Form::submit('Paid', ['class' => 'btn btn-sm bg-primary'])}} 
+                                                                @endif -->
                                                             </div>
                                                             {!! Form::close() !!}
                                                         </td>
@@ -334,15 +334,27 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
+                {!! Form::open(['action' => 'App\Http\Controllers\PaymentsController@store', 'method' => 'POST']) !!}
                 <div class="modal-body bg-secondary">
-                    <p>Date</p>
-                    <p>Customer</p>
-                    <p>Amount</p>
+
+                    <div class="row">
+                        {{Form::label('custid', 'Customer:', ['class' => 'form-control bg-secondary col-sm-3'])}}
+                        {{Form::select('custid', $clients, null, ['class' => 'form-control col-sm-9']) }}
+                    </div>
+                    <div class="row">
+                        {{Form::label('amount', 'Amount:', ['class' => 'form-control bg-secondary col-sm-3'])}}
+                        {{Form::text('amount', '', ['class' => 'form-control col-sm-9'])}}
+                    </div>
+                    <div class="row">
+                        {{Form::label('date', 'Date:', ['class' => 'form-control bg-secondary col-sm-3'])}}
+                        {{Form::text('date', '' . (date("Y-m-d")), ['class' => 'form-control col-sm-9', 'readonly' => 'true'])}}
+                    </div>
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-outline-light">Save changes</button>
+                    {{Form::submit('Submit', ['class' => 'btn btn-outline-light'])}}
                 </div>
+                {!! Form::close() !!}
             </div>
         </div>
     </div>
@@ -351,14 +363,16 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-warning">
-                    <h4 class="modal-title">Over Due Accounts</h4>
+                    <h4 class="modal-title">Accounts</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="modal-body bg-secondary">
-                    <p>Customer</p>
-                    <p>Amount Over Due</p>
+                    @foreach($balances as $balance)
+                        Client: {{$balance['Client']}}<br>
+                        Balance: {{$balance['Balance']}}<br><br>
+                    @endforeach
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
