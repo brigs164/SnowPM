@@ -80,6 +80,6 @@ class HomeController extends Controller
             $itotal = 0;
         }
         
-        return view('home')->with('invoices', $invoices)->with('jobs', $jobs)->with('invoiceTotals', $invoiceTotals)->with('invoicePendingTotals', $invoicePendingTotals)->with('expenseTotals', $expenseTotals);
+        return view('home')->with('invoices', $invoices)->with('expenses', $expenses)->with('jobs', $jobs)->with('invoiceTotals', $invoiceTotals)->with('invoicePendingTotals', $invoicePendingTotals)->with('expenseTotals', $expenseTotals);
     }
 }

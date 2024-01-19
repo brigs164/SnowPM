@@ -254,32 +254,38 @@ $invoiceFinalTotals = array_values($invoiceTotals);
     $(function(){'use strict'
 
         var invoice = <?php echo json_encode($invoiceFinalTotals); ?>;
+        var expense = <?php echo json_encode($expenseTotals); ?>;
 
         var salesChartCanvas=$('#salesChart').get(0).getContext('2d')
 
         var salesChartData={
             labels:['January','February','March','April','May','June','July','August','September','October','Novemeber','December'],
             datasets:[
+                {label:'EXPENSES',backgroundColor:'rgba(210, 214, 222, 0.9)',
+                borderColor:'rgba(210, 214, 222, 0.8)',
+                pointRadius:false,
+                pointColor:'rgba(210, 214, 222, 1)',
+                pointStrokeColor:'#c1c7d1',
+                pointHighlightFill:'#fff',
+                pointHighlightStroke:'rgba(220,220,220,1)',
+                data:expense},
                 {label:'INCOME',backgroundColor:'rgba(60,141,188,0.9)',
                 borderColor:'rgba(60,141,188,0.8)',
                 pointRadius:false,
                 pointColor:'#3b8bba',
                 pointStrokeColor:'rgba(60,141,188,1)',
-                pointHighlightFill:'#fff',pointHighlightStroke:'rgba(60,141,188,1)',
-                data:invoice},
-                {label:'EXPENSES',backgroundColor:'rgba(210, 214, 222, 1)',
-                borderColor:'rgba(210, 214, 222, 1)',pointRadius:false,pointColor:'rgba(210, 214, 222, 1)',
-                pointStrokeColor:'#c1c7d1',pointHighlightFill:'#fff',pointHighlightStroke:'rgba(220,220,220,1)',
-                data:[]}
+                pointHighlightFill:'#fff',
+                pointHighlightStroke:'rgba(60,141,188,1)',
+                data:invoice}
             ]
         }
 
         var salesChartOptions={
             maintainAspectRatio:false,
             responsive:true,
-            legend:{display:false},
-            scales:{xAxes:[{gridLines:{display:false}}],
-            yAxes:[{gridLines:{display:false}}]}}
+            legend:{display:true},
+            scales:{xAxes:[{gridLines:{display:true}}],
+            yAxes:[{gridLines:{display:true}}]}}
 
         var salesChart=new Chart(salesChartCanvas,{type:'line',data:salesChartData,options:salesChartOptions})
     })

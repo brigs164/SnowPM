@@ -22,7 +22,7 @@ class CreateControlPanelsTable extends Migration
 
         DB::table('control_panels')->insert(
             array(
-                ['Year1' => '2022', 'Year2' => '2023'],
+                ['Year1' => '2023', 'Year2' => '2024'],
             )
         );
     }
